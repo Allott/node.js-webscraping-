@@ -38,7 +38,9 @@ request("http://www." + webAddress, (error, response, html) => {
     else{
         console.log(`Connected finding:${enquiries}`)
         var $ = cheer.load(html); //load HTML into cheer
-        let text = $('body').text();//get all the text in body
+        let text = []
+        text.push($('body').text());//get all the text in body
+        text += $('a')
         //console.log(text);//remove this
         //here
 
@@ -55,7 +57,11 @@ request("http://www." + webAddress, (error, response, html) => {
         for (i=0; i < enquiries.length; i++)
         {
             outputString += enquiries[i] + "\n";
-            outputString += results[i] + "\n";
+
+            for (j=0; j < results[i].length; j++)
+            {
+                outputString += results[i][j] + "\n";
+            }
         }
         
         //console.log(results);
